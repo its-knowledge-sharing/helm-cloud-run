@@ -7,6 +7,8 @@ on:
 
 env:
   CHART_NAME: helm-cloud-run
+  GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+  GITHUB_TOKEN: ${{ secrets.EVER_PAT_GITHUB_TOKEN }}
 
 jobs:
   build:    
