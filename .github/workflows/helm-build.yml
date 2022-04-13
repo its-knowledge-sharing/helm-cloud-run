@@ -1,0 +1,22 @@
+name: Helm Cloud Run
+
+on:
+  push:
+    branches: [ develop, main ]
+    tags: ['v*.*.*']
+
+env:
+  CHART_NAME: helm-cloud-run
+
+jobs:
+  build:    
+    runs-on: self-hosted #This repository need to be private, otherwise runner will not pick the job (security reason)
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Build Helm
+      id: build-helm-chart
+      run: |
+        run-prepare.bash
+        run-helm-build.bash $(pwd) ${CHART_NAME}

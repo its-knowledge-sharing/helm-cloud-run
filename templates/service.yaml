@@ -1,0 +1,20 @@
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: {{ .Values.appName }}
+spec:
+  template:
+    spec:
+      containerConcurrency: {{ .Values.spec.containerConcurrency }}
+      timeoutSeconds: {{ .Values.spec.timeoutSeconds }}
+      containers:
+      - image: {{ .Values.container.image }}:{{ .Values.container.tag }}
+        ports:
+        {{- toYaml .Values.container.ports | nindent 8 }}
+        env:
+        {{- toYaml .Values.container.env | nindent 8 }}
+        resources:
+        {{- toYaml .Values.container.resources | nindent 10 }}
+  traffic:
+    {{- toYaml .Values.traffic | nindent 2 }}

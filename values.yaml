@@ -1,0 +1,28 @@
+appName: "change-this"
+spec:
+  containerConcurrency: 2
+  timeoutSeconds: 300
+
+# Allow only 1 container for now
+container:
+  image: change-this/change-this
+  tag: tag-here
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 512Mi  
+  ports:
+    - name: http1
+      containerPort: 8080
+  env:
+    - name: NODE_ENV
+      value: staging
+
+    - name: GCP_SECRET_ENV
+      valueFrom:
+        secretKeyRef:
+          key: latest #secret version
+          name: name-in-secret-manager
+traffic:
+  - percent: 100
+    latestRevision: true
