@@ -10,6 +10,8 @@ echo "#### Running the ${0} script ####"
 
 GCS_PATH=gs://evermed-devops-helm-charts/${CHART_NAME}
 
+helm plugin install https://github.com/hayorov/helm-gcs.git
+
 helm gcs init ${GCS_PATH}
 helm dependencies update
 helm repo add ${ALIAS} ${GCS_PATH}
