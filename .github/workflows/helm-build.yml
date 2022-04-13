@@ -19,4 +19,4 @@ jobs:
       id: build-helm-chart
       run: |
         run-prepare.bash
-        run-helm-build.bash $(pwd) ${CHART_NAME}
+        ./run-helm-build.bash $(pwd) ${CHART_NAME}
